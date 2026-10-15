@@ -1,0 +1,19 @@
+name: Docs validation
+on:
+  push:
+    paths: ["docs/**", "mkdocs.yml", "requirements-docs.txt", ".github/workflows/docs-check.yml"]
+  pull_request:
+    paths: ["docs/**", "mkdocs.yml", "requirements-docs.txt", ".github/workflows/docs-check.yml"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-docs.txt
+      - run: mkdocs build --strict
+# No auto publication to GitHub Pages.
