@@ -1,0 +1,43 @@
+site_name: MUP Electronic Queue — Документация
+site_description: Неофициальная проектная документация
+theme:
+  name: material
+  language: ru
+  features:
+    - navigation.sections
+    - content.code.copy
+    - search.highlight
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+plugins:
+  - search
+nav:
+  - Главная: index.md
+  - Проект:
+      - Обзор: 01-project/overview.md
+      - План: 01-project/roadmap.md
+  - Требования:
+      - SRS: 02-requirements/srs.md
+      - Бизнес-правила: 02-requirements/business-rules.md
+      - Открытые вопросы: 02-requirements/open-questions.md
+  - Пользовательские сценарии: 03-design/user-flows.md
+  - Архитектура:
+      - Обзор: 04-architecture/overview.md
+      - Модель данных: 04-architecture/data-model.md
+      - ADR-0001: 04-architecture/decisions/ADR-0001-no-timeslots.md
+      - ADR-0002: 04-architecture/decisions/ADR-0002-daily-limit.md
+  - Безопасность: 05-security/privacy-and-passport.md
+  - Тестирование: 06-development/testing-strategy.md
+  - Развертывание: 06-development/deployment.md
+  - Для посетителя: 07-user-guides/applicant.md
+  - Для сотрудника: 07-user-guides/operator.md
+  - Презентация:
+      - Структура: 08-presentation/pitch-outline.md
+      - Пилот: 08-presentation/pilot-plan.md
