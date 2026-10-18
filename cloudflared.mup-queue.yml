@@ -1,0 +1,11 @@
+tunnel: b280f559-b3e1-428d-92cd-c5d3c0cfcc92
+credentials-file: /etc/cloudflared/b280f559-b3e1-428d-92cd-c5d3c0cfcc92.json
+
+ingress:
+  - hostname: mup.sklit.xyz
+    service: http://192.168.1.104:8088
+
+  - hostname: queue.sklit.xyz
+    service: http://192.168.1.104:8088
+
+  - service: http_status:404

@@ -1,0 +1,27 @@
+name: mup-queue-tests
+services:
+  db-test:
+    image: postgres:16.15
+    environment:
+      POSTGRES_USER: queue
+      POSTGRES_PASSWORD: test-only-password
+      POSTGRES_DB: queue_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U queue -d queue_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+  checks:
+    build: ./backend
+    environment:
+      APP_ENV: demo
+      DATABASE_URL: postgresql+psycopg://queue:test-only-password@db-test:5432/queue_test
+      TEST_DATABASE_URL: postgresql+psycopg://queue:test-only-password@db-test:5432/queue_test
+      DATA_DIR: /tmp/test-files
+      TEST_DATA_DIR: /tmp/test-files
+    depends_on:
+      db-test:
+        condition: service_healthy
+    command: ["sh", "-c", "uv run alembic upgrade head && uv run pytest -q && uv run ruff check app tests"]
